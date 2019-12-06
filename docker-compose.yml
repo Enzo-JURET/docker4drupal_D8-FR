@@ -1,0 +1,158 @@
+version: "3"
+
+services:
+
+#######################################################################################################
+# Nom de la section du conteneur de mariadb
+  mariadb:
+    # Image mariadb venant de Docker Hub
+    image: wodby/mariadb:$MARIADB_TAG
+    # Nom du conteneur
+    container_name: "${PROJECT_NAME}_mariadb"
+    # Définit le délai d'attente avant de forcer la destruction du conteneur
+    stop_grace_period: 30s
+    # Permet définir les variables d'environnement
+    environment:
+      # Définit le mot de passe root de MySQL
+      MYSQL_ROOT_PASSWORD: $DB_ROOT_PASSWORD
+      # Définit le nom de la base de données MySQL
+      MYSQL_DATABASE: $DB_NAME
+      # Définit le nom de l'utilisateur de la base MySQL
+      MYSQL_USER: $DB_USER
+      # Définit le mot de passe de l'utilosateur de la base MYSQL
+      MYSQL_PASSWORD: $DB_PASSWORD
+
+#######################################################################################################
+  # Nom de la section du conteneur de php
+  php:
+    # Image PHP venant de Docker Hub 
+    image: wodby/drupal-php:$PHP_TAG
+    # Nom du conteneur
+    container_name: "${PROJECT_NAME}_php"
+    # Permet de définir les variables d'environnement
+    environment:
+      # Hôte de la Base de données  
+      DB_HOST: $DB_HOST
+      # Port de la Base de données
+      DB_PORT: $DB_PORT
+      # Nom de l'utilisateur de la base MySQL
+      DB_USER: $DB_USER
+      # Mot de passe de l'utilisateur de la base MySQL
+      DB_PASSWORD: $DB_PASSWORD
+      # Nom de la base MySQL
+      DB_NAME: $DB_NAME
+      # ???
+      DB_DRIVER: $DB_DRIVER
+      # ???
+      PHP_FPM_USER: wodby
+      # ???
+      PHP_FPM_GROUP: wodby
+      COLUMNS: 80
+    # Définit la position ou va agir php
+    volumes:
+      - ./:/var/www/html
+
+#######################################################################################################
+  # Nom de la section du conteneur nginx
+  nginx:
+    # Image nginx venant de Docker Hub
+    image: wodby/nginx:$NGINX_TAG
+    # Nom du conteneur
+    container_name: "${PROJECT_NAME}_nginx"
+    # Définit les dépendances aux autres conteneurs
+    depends_on:
+      - php
+    # Permet de définir les variables d'environnement
+    environment:
+      # Permet de définir si oui ou non nous voulons activer l'ouverture de la mise en cache proposé par nginx
+      NGINX_STATIC_OPEN_FILE_CACHE: "off"
+      NGINX_ERROR_LOG_LEVEL: debug
+      # Permettre de définir l'hôte backend de nginx
+      NGINX_BACKEND_HOST: php
+      # Permet de définir le chemin d'accès au root sur nginx
+      NGINX_SERVER_ROOT: /var/www/html/web
+      # Définit un preset vhost
+      NGINX_VHOST_PRESET: $NGINX_VHOST_PRESET
+    # Définit la position de nginx
+    volumes:
+      - ./:/var/www/html
+    # Définit l'URL de sorti du serveur web depuis traefik
+    labels:
+      - "traefik.http.routers.${PROJECT_NAME}_nginx.rule=Host(`${PROJECT_BASE_URL}`)"
+
+#######################################################################################################
+  # Nom de la section du conteneur varnish
+  varnish:
+    # Image nginx venant de Docker Hub
+    image: wodby/varnish:$VARNISH_TAG
+    # Nom du conteneur
+    container_name: "${PROJECT_NAME}_varnish"
+    # Définit les dépendances aux autres conteneurs
+    depends_on:
+      - nginx
+    # Permet de définir les variables d'environnement
+    environment:
+      # Clé de secret varnish
+      VARNISH_SECRET: secret
+      # Permet de définir le conteneur hôte que varnish va prendre en charge les mises en caches
+      VARNISH_BACKEND_HOST: nginx
+      # Permet de définir le port sur lequel varnish va prendre en charge les mises en caches
+      VARNISH_BACKEND_PORT: 80
+      # Permet d'identifier le nom de la configuration prédéfinie de varnish 
+      VARNISH_CONFIG_PRESET: drupal
+      # Permet d'idiquer si nous acceptons les PURGES de varnish (0 = Non)
+      VARNISH_ALLOW_UNRESTRICTED_PURGE: 1
+    # Définit l'URL de sorti de la page de configuration de varnish depuis traefik
+    labels:
+      - "traefik.http.services.${PROJECT_NAME}_varnish.loadbalancer.server.port=6081"
+      - "traefik.http.routers.${PROJECT_NAME}_varnish.rule=Host(`varnish.${PROJECT_BASE_URL}`)"
+
+#######################################################################################################
+  # Nom de la section du conteneur solr
+  solr:
+    # Image solr venant de Docker Hub
+    image: wodby/solr:$SOLR_TAG
+    # Nom du conteneur
+    container_name: "${PROJECT_NAME}_solr"
+    # Permet de définir les variables d'environnement
+    environment:
+      # Permet de définir la configuration par défault de Solr
+      SOLR_DEFAULT_CONFIG_SET: $SOLR_CONFIG_SET
+      # ???
+      SOLR_HEAP: 1024m
+    # Définit l'URL de sorti de la page de configuration de solr depuis traefik
+    labels:
+      - "traefik.http.routers.${PROJECT_NAME}_solr.rule=Host(`solr.${PROJECT_BASE_URL}`)"
+
+#######################################################################################################
+  # Nom de la section du conteneur portainer
+  portainer:
+    # Image portainer venant de Docker Hub
+    image: portainer/portainer
+    # Nom du conteneur
+    container_name: "${PROJECT_NAME}_portainer"
+    # Commande exécuté lors de la création du serveur Docker (docker-compose up -d)
+    command: --no-auth -H unix:///var/run/docker.sock
+    # ???
+    volumes:
+      - /var/run/docker.sock:/var/run/docker.sock
+    # Définit l'URL de sorti de la page de configuration de portainer depuis traefik
+    labels:
+      - "traefik.http.routers.${PROJECT_NAME}_portainer.rule=Host(`portainer.${PROJECT_BASE_URL}`)"
+
+#######################################################################################################
+  # Nom de la section du conteneur traefik
+  traefik:
+    # Image traefik venant de Docker Hub
+    image: traefik:v2.0
+    # Nom du conteneur
+    container_name: "${PROJECT_NAME}_traefik"
+    # Commande exécuté lors de la création du serveur Docker (docker-compose up -d)
+    command: --api.insecure=true --providers.docker
+    # Permet de définir le port d'accès au serveur web 
+    ports:
+      - 'PORT_DISPONIBLE:80'
+#      - '8080:8080' # Dashboard
+    # ???
+    volumes:
+      - /var/run/docker.sock:/var/run/docker.sock
