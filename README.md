@@ -4,15 +4,15 @@
 
 ## Introduction
 
-Docker4Drupal is a set of docker images optimized for Drupal. Use `docker-compose.yml` file from the [latest stable release](https://github.com/wodby/docker4drupal/releases) to spin up local environment on Linux, Mac OS X and Windows. 
+Docker4Drupal est un ensemble d'images de docker optimisé pour Drupal. Utilisez le fichier `docker-compose.yml` de la[dernière version stable](https://github.com/wodby/docker4drupal/releases) pour faire tourner l'environnement local sous Linux, Mac OS X et Windows. 
 
-* Read the docs on [**how to use**](https://wodby.com/docs/stacks/drupal/local#usage)
-* Join our community on [Spectrum](https://spectrum.chat/wodby/drupal) and ask questions in `#Drupal` channel
-* Follow [@wodbycloud](https://twitter.com/wodbycloud) for future announcements
+* Lire la documentation sur[**comment utiliser**](https://wodby.com/docs/stacks/drupal/local#usage)
+* Rejoignez notre communauté sur[Spectrum](https://spectrum.chat/wodby/drupal) et posez des questions sur le canal `#Drupal`.
+* Suivez[@wodbycloud](https://twitter.com/wodbycloud) pour les annonces à venir
 
 ## Stack
 
-The Drupal stack consist of the following containers:
+La pile Drupal se compose des conteneurs suivants
 
 | Container       | Versions               | Service name    | Image                              | Default |
 | --------------  | ---------------------- | --------------- | ---------------------------------- | ------- |
@@ -43,42 +43,42 @@ The Drupal stack consist of the following containers:
 | Portainer       | latest                 | `portainer`     | [portainer/portainer]              | ✓       |
 | Traefik         | latest                 | `traefik`       | [_/traefik]                        | ✓       |
 
-Supported Drupal versions: 8 / 7
+Versions Drupal supportées : 8 / 7
 
-❗️PHP 5.6 [has reached end of life](http://php.net/supported-versions.php) and no longer supported by PHP team. PHP 7.1 is currently in security fix only mode. We strongly advise you to migrate to the latest stable PHP version.   
+❗️PHP 5.6[a atteint la fin de vie](http://php.net/supported-versions.php) et n'est plus supporté par l'équipe PHP. PHP 7.1 est actuellement en mode correctif de sécurité uniquement. Nous vous conseillons fortement de migrer vers la dernière version stable de PHP.   
 
 ## Documentation
 
-Full documentation is available at https://wodby.com/docs/stacks/drupal/local.
+La documentation complète est disponible à l'adresse https://wodby.com/docs/stacks/drupal/local
 
 ## Images' tags
 
-Images tags format is `[VERSION]-[STABILITY_TAG]` where:
+Le format des balises d'images est `[VERSION]-[STABILITY_TAG]` où :
 
-`[VERSION]` is the _version of an application_ (without patch version) running in a container, e.g. `wodby/nginx:1.15-x.x.x` where Nginx version is `1.15` and `x.x.x` is a stability tag. For some images we include both major and minor version like PHP `7.2`, for others we include only major like Redis `5`. 
+`[VERSION]` est la _version d'une application_ (sans version patch) s'exécutant dans un conteneur, par exemple `wodby/nginx:1.1.15-x.x.x.x' où la version Nginx est `1.15' et `x.x.x' est un tag de stabilité. Pour certaines images, nous incluons des versions majeures et mineures comme PHP `7.2`, pour d'autres nous incluons seulement des versions majeures comme Redis `5`. 
 
-`[STABILITY_TAG]` is the _version of an image_ that corresponds to a git tag of the image repository, e.g. `wodby/mariadb:10.2-3.3.8` has MariaDB `10.2` and stability tag [`3.3.8`](https://github.com/wodby/mariadb/releases/tag/3.3.8). New stability tags include patch updates for applications and image's fixes/improvements (new env vars, orchestration actions fixes, etc). Stability tag changes described in the corresponding a git tag description. Stability tags follow [semantic versioning](https://semver.org/).
-
-We highly encourage to use images only with stability tags.
+'[STABILITY_TAG]` est la _version d'une image_ qui correspond à une balise git du référentiel d'images, par exemple `wodby/mariadb:10.2-3.3.3.8` a MariaDB `10.2` et la balise de stabilité[`3.3.8`](https://github.com/wodby/mariadb/releases/tag/3.3.8). Les nouvelles balises de stabilité incluent des mises à jour de patchs pour les applications et les corrections/améliorations d'images (nouvelles env vars, corrections d'actions d'orchestration, etc). Les changements d'étiquette de stabilité sont décrits dans la description correspondante de l'étiquette git. Les étiquettes de stabilité suivent[versionnement sémantique](https://semver.org/).
+Nous vous encourageons fortement à n'utiliser des images qu'avec des étiquettes de stabilité.
+Traduit avec www.DeepL.com/Translator (version gratuite)
 
 ## Maintenance
 
-We regularly update images used in this stack and release them together, see [releases page](https://github.com/wodby/docker4drupal/releases) for full changelog and update instructions. Most of routine updates for images and this project performed by [the bot](https://github.com/wodbot) via scripts located at [wodby/images](https://github.com/wodby/images).
+Nous mettons régulièrement à jour les images utilisées dans cette pile et les publions ensemble, voir[page des versions](https://github.com/wodby/docker4drupal/releases) pour le journal complet des modifications et les instructions de mise à jour. La plupart des mises à jour de routine pour les images et ce projet ont été effectuées par[the bot](https://github.com/wodbot) via des scripts situés sur[wodby/images](https://github.com/wodby/images).
 
-## Beyond local environment
+## Au-delà de l'environnement local
 
-Docker4Drupal is a project designed to help you spin up local environment with docker-compose. If you want to deploy a consistent stack with orchestrations to your own server, check out [Drupal stack](https://wodby.com/stacks/drupal) on Wodby ![](https://www.google.com/s2/favicons?domain=wodby.com).
+Docker4Drupal est un projet conçu pour vous aider à créer un environnement local avec docker-compose. Si vous voulez déployer une pile cohérente avec orchestrations sur votre propre serveur, allez voir[Drupal stack](https://wodby.com/stacks/drupal) sur Wodby ![](https://www.google.com/s2/favicons?domain=wodby.com).
 
-## Other Docker4x projects
+## Autres projets Docker4x
 
 * [docker4php](https://github.com/wodby/docker4php)
 * [docker4wordpress](https://github.com/wodby/docker4wordpress)
 * [docker4ruby](https://github.com/wodby/docker4ruby)
 * [docker4python](https://github.com/wodby/docker4python)
 
-## License
+## Licence d'utilisation
 
-This project is licensed under the MIT open source license.
+Ce projet est licencié sous la licence open source du MIT.
 
 [Apache]: https://wodby.com/docs/stacks/drupal/containers#apache
 [AthenaPDF]: https://wodby.com/docs/stacks/drupal/containers#athenapdf
