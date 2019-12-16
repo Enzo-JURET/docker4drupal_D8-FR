@@ -25,7 +25,7 @@ services:
 #######################################################################################################
   # Nom de la section du conteneur php
   php:
-    # Image PHP preovenant de Docker Hub (Indéxé de la version de php choisi dans le fichier .env)
+    # Image PHP provenant de Docker Hub (Indéxé de la version de php choisi dans le fichier .env)
     image: wodby/drupal-php:$PHP_TAG
     # Nom du conteneur (Préfixé du nom de votre projet se trouvant dans le fichier .env)
     container_name: "${PROJECT_NAME}_php"
@@ -155,3 +155,188 @@ services:
     # Définit la chemin ou se trouve votre le fichier de prépogrammation algorithmique .sock de Docker, afin que Traefik connaissent l'emplacement sur lequel il doit agir
     volumes:
       - /var/run/docker.sock:/var/run/docker.sock
+
+#######################################################################################################
+#                                         CONTENEUR PRECONFIGURE
+#######################################################################################################
+# Les conteneurs affichés en dessous sont des conteneurs pouvant être utilisés dans la création
+# d'un serveur web pour drupal 8, cependant vous n'êtes absolument pas obligé de les utiliser.
+
+#######################################################################################################
+# mailhog:
+#    image: mailhog/mailhog
+#    container_name: "${PROJECT_NAME}_mailhog"
+#    labels:
+#      - "traefik.http.services.${PROJECT_NAME}_mailhog.loadbalancer.server.port=8025"
+#      - "traefik.http.routers.${PROJECT_NAME}_mailhog.rule=Host(`mailhog.${PROJECT_BASE_URL}`)"
+
+#######################################################################################################
+### REMPLACER À LA PLACE DU CONTENEUR mariadb
+#  postgres:
+#    image: wodby/postgres:$POSTGRES_TAG
+#    container_name: "${PROJECT_NAME}_postgres"
+#    stop_grace_period: 30s
+#    environment:
+#      POSTGRES_PASSWORD: $DB_PASSWORD
+#      POSTGRES_DB: $DB_NAME
+#      POSTGRES_USER: $DB_USER
+#    volumes:
+#      - ./postgres-init:/docker-entrypoint-initdb.d # Place init file(s) here.
+#      - /path/to/postgres/data/on/host:/var/lib/postgresql/data # Use bind mount
+
+#######################################################################################################
+### REMPLACER À LA PLACE DU CONTENEUR nginx
+#  apache:
+#    image: wodby/apache:$APACHE_TAG
+#    container_name: "${PROJECT_NAME}_apache"
+#    depends_on:
+#      - php
+#    environment:
+#      APACHE_LOG_LEVEL: debug
+#      APACHE_BACKEND_HOST: php
+#      APACHE_VHOST_PRESET: php
+#      APACHE_DOCUMENT_ROOT: /var/www/html/web
+#    volumes:
+#      - ./:/var/www/html
+## For macOS users (https://wodby.com/docs/stacks/drupal/local#docker-for-mac)
+##      - ./:/var/www/html:cached # User-guided caching
+##      - docker-sync:/var/www/html # Docker-sync
+#    labels:
+#      - "traefik.http.routers.${PROJECT_NAME}_apache.rule=Host(`${PROJECT_BASE_URL}`)"
+
+#######################################################################################################
+### REMPLACER À LA PLACE DU CONTENEUR varnish
+#  redis:
+#    container_name: "${PROJECT_NAME}_redis"
+#    image: wodby/redis:$REDIS_TAG
+
+#######################################################################################################
+#  adminer:
+#    container_name: "${PROJECT_NAME}_adminer"
+#    image: wodby/adminer:$ADMINER_TAG
+#    environment:
+## For PostgreSQL:
+##      ADMINER_DEFAULT_DB_DRIVER: pgsql
+#      ADMINER_DEFAULT_DB_HOST: $DB_HOST
+#      ADMINER_DEFAULT_DB_NAME: $DB_NAME
+#    labels:
+#      - "traefik.http.routers.${PROJECT_NAME}_adminer.rule=Host(`adminer.${PROJECT_BASE_URL}`)"
+
+#######################################################################################################
+#  drupal-node:
+#    image: wodby/drupal-node:$DRUPAL_NODE_TAG
+#    container_name: "${PROJECT_NAME}_drupal_nodejs"
+#    environment:
+#       NODE_SERVICE_KEY: node-service-key
+#    labels:
+#      - "traefik.http.routers.${PROJECT_NAME}_drupal_node.rule=Host(`drupal_node.${PROJECT_BASE_URL}`)"
+#    volumes:
+#      - ./path/to/your/single-page-app:/app
+#    command: sh -c 'npm install && npm run start'
+
+#######################################################################################################
+### REMPLACER À LA PLACE DU CONTENEUR varnish
+#  memcached:
+#    container_name: "${PROJECT_NAME}_memcached"
+#    image: wodby/memcached:$MEMCACHED_TAG
+
+#######################################################################################################
+#  rsyslog:
+#    container_name: "${PROJECT_NAME}_rsyslog"
+#    image: wodby/rsyslog:$RSYSLOG_TAG
+
+#######################################################################################################
+#  athenapdf:
+#    image: arachnysdocker/athenapdf-service:$ATHENAPDF_TAG
+#    container_name: "${PROJECT_NAME}_athenapdf"
+#    environment:
+#      WEAVER_AUTH_KEY: weaver-auth-key
+#      WEAVER_ATHENA_CMD: "athenapdf -S"
+#      WEAVER_MAX_WORKERS: 10
+#      WEAVER_MAX_CONVERSION_QUEUE: 50
+#      WEAVER_WORKER_TIMEOUT: 90
+#      WEAVER_CONVERSION_FALLBACK: "false"
+
+#######################################################################################################
+#  node:
+#    image: wodby/node:$NODE_TAG
+#    container_name: "${PROJECT_NAME}_node"
+#    working_dir: /var/www/html/path/to/theme/to/build
+#    labels:
+#      - "traefik.http.services.${PROJECT_NAME}_node.loadbalancer.server.port=3000"
+#      - "traefik.http.routers.${PROJECT_NAME}_node.rule=Host(`node.${PROJECT_BASE_URL}`)"
+#    expose:
+#      - "3000"
+#    volumes:
+#      - ./:/var/www/html
+#    command: sh -c 'yarn install && yarn run start'
+
+#######################################################################################################
+#  blackfire:
+#    image: blackfire/blackfire
+#    container_name: "${PROJECT_NAME}_blackfire"
+#    environment:
+#      BLACKFIRE_SERVER_ID: XXXXX
+#      BLACKFIRE_SERVER_TOKEN: YYYYY
+
+#######################################################################################################
+#  webgrind:
+#    image: wodby/webgrind:$WEBGRIND_TAG
+#    container_name: "${PROJECT_NAME}_webgrind"
+#    environment:
+#      WEBGRIND_PROFILER_DIR: /mnt/files/xdebug/profiler
+#    labels:
+#      - "traefik.http.routers.${PROJECT_NAME}_webgrind.rule=Host(`webgrind.${PROJECT_BASE_URL}`)"
+#    volumes:
+#      - files:/mnt/files
+
+#######################################################################################################
+### REMPLACER À LA PLACE DU CONTENEUR solr
+#  elasticsearch:
+#    image: wodby/elasticsearch:$ELASTICSEARCH_TAG
+#    environment:
+#      ES_JAVA_OPTS: "-Xms500m -Xmx500m"
+#    ulimits:
+#      memlock:
+#        soft: -1
+#        hard: -1
+
+#######################################################################################################
+#  kibana:
+#    image: wodby/kibana:$KIBANA_TAG
+#    depends_on:
+#      - elasticsearch
+#    labels:
+#      - "traefik.http.services.${PROJECT_NAME}_kibana.loadbalancer.server.port=5601"
+#      - "traefik.http.routers.${PROJECT_NAME}_kibana.rule=Host(`kibana.${PROJECT_BASE_URL}`)"
+
+#######################################################################################################
+#  opensmtpd:
+#    container_name: "${PROJECT_NAME}_opensmtpd"
+#    image: wodby/opensmtpd:$OPENSMTPD_TAG
+
+#######################################################################################################
+#  xhprof:
+#    image: wodby/xhprof:$XHPROF_TAG
+#    restart: always
+#    volumes:
+#      - files:/mnt/files
+#    labels:
+#      - "traefik.http.routers.${PROJECT_NAME}_xhprof.rule=Host(`xhprof.${PROJECT_BASE_URL}`)"
+
+#######################################################################################################
+#  chrome:
+#    image: selenium/standalone-chrome:$SELENIUM_CHROME_TAG
+#    container_name: "${PROJECT_NAME}_chrome"
+#    volumes:
+#      - /dev/shm:/dev/shm
+#    entrypoint:
+#      - chromedriver
+#      - "--no-sandbox"
+#      - "--disable-dev-shm-usage"
+#      - "--log-path=/tmp/chromedriver.log"
+#      - "--verbose"
+#      - "--whitelisted-ips="
+
+#######################################################################################################
+#######################################################################################################
