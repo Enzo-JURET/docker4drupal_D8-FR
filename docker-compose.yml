@@ -150,11 +150,13 @@ services:
     command: --api.insecure=true --providers.docker
     # Définit le port d'accès au stack Docker comprenant tous les composants de notre serveur web 
     ports:
-      - 'PORT_DISPONIBLE:80'
+      - '[PORT_DISPONIBLE]:80'
 #      - '8080:8080' # Dashboard
     # Définit la chemin ou se trouve votre le fichier de prépogrammation algorithmique .sock de Docker, afin que Traefik connaissent l'emplacement sur lequel il doit agir
     volumes:
       - /var/run/docker.sock:/var/run/docker.sock
+
+
 
 #######################################################################################################
 #                                         CONTENEUR PRECONFIGURE
@@ -339,4 +341,5 @@ services:
 #      - "--whitelisted-ips="
 
 #######################################################################################################
+#
 #######################################################################################################
