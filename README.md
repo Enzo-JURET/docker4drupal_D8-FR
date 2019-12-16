@@ -12,26 +12,26 @@ Docker4Drupal est un ensemble d'images de docker optimisé pour Drupal. Utilisez
 
 ## Stack
 
-La pile Drupal se compose des conteneurs suivants
+La pile (stack) Drupal se compose des conteneurs par défaut suivants :
 
 | Container       | Versions               | Service name    | Image                              | Default |
 | --------------  | ---------------------- | --------------- | ---------------------------------- | ------- |
-| [Nginx]         | 1.17, 1.16             | `nginx`         | [wodby/nginx]                      | ✓       |
+| [Nginx]         | 1.17, 1.16             | `nginx`         | [wodby/nginx]                      | ✓        |
 | [Apache]        | 2.4                    | `apache`        | [wodby/apache]                     |         |
-| [Drupal]        | 8, 7                   | `php`           | [wodby/drupal]                     | ✓       |
-| [PHP]           | 7.3, 7.2, 7.1, 5.6     | `php`           | [wodby/drupal-php]                 |         |
+| [Drupal]        | 8, 7                   | `php`           | [wodby/drupal]                     |        |
+| [PHP]           | 7.3, 7.2, 7.1, 5.6     | `php`           | [wodby/drupal-php]                 | ✓        |
 | [MariaDB]       | 10.4, 10.3, 10.2, 10.1 | `mariadb`       | [wodby/mariadb]                    | ✓       |
 | [PostgreSQL]    | 12, 11, 10, 9.x        | `postgres`      | [wodby/postgres]                   |         |
 | [Redis]         | 5, 4                   | `redis`         | [wodby/redis]                      |         |
 | [Memcached]     | 1                      | `memcached`     | [wodby/memcached]                  |         |
-| [Varnish]       | 6.0, 4.1               | `varnish`       | [wodby/varnish]                    |         |
+| [Varnish]       | 6.0, 4.1               | `varnish`       | [wodby/varnish]                    | ✓        |
 | [Node.js]       | 12, 10, 8              | `node`          | [wodby/node]                       |         |
 | [Drupal node]   | 1.0                    | `drupal-node`   | [wodby/drupal-node]                |         |
-| [Solr]          | 8, 7, 6, 5             | `solr`          | [wodby/solr]                       |         |
+| [Solr]          | 8, 7, 6, 5             | `solr`          | [wodby/solr]                       | ✓        |
 | [Elasticsearch] | 7, 6                   | `elasticsearch` | [wodby/elasticsearch]              |         |
 | [Kibana]        | 7, 6                   | `kibana`        | [wodby/kibana]                     |         |
 | [OpenSMTPD]     | 6.0                    | `opensmtpd`     | [wodby/opensmtpd]                  |         |
-| [Mailhog]       | latest                 | `mailhog`       | [mailhog/mailhog]                  | ✓       |
+| [Mailhog]       | latest                 | `mailhog`       | [mailhog/mailhog]                  |         |
 | [AthenaPDF]     | 2.10.0                 | `athenapdf`     | [arachnysdocker/athenapdf-service] |         |
 | [Rsyslog]       | latest                 | `rsyslog`       | [wodby/rsyslog]                    |         |
 | [Blackfire]     | latest                 | `blackfire`     | [blackfire/blackfire]              |         |
