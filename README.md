@@ -69,6 +69,16 @@ Nous mettons régulièrement à jour les images utilisées dans cette pile et le
 
 Docker4Drupal est un projet conçu pour vous aider à créer un environnement local avec docker-compose. Si vous voulez déployer une pile cohérente avec orchestrations sur votre propre serveur, allez voir[Drupal stack](https://wodby.com/stacks/drupal) sur Wodby ![](https://www.google.com/s2/favicons?domain=wodby.com).
 
+## Etapes de mise en place
+
+* Télécharger / Cloner le projet dans un répertoire
+* Modifier le fichier des variables d'environnement (.env)
+* Modifier le fichier de configuration .yml (docker-compose.yml)
+* Déplacer les fichiers de Docker4Drupal à la racine du projet Drupal 8
+* Démarer le serveur Docker avec la commande (docker-compose up -d)
+* Accéder à votre site avec cette URL : PROJECT_BASE_URL:PORT_TRAEFIK
+
+
 ## Autres projets Docker4x
 
 * [docker4php](https://github.com/wodby/docker4php)
