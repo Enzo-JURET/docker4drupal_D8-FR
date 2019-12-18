@@ -21,6 +21,9 @@ services:
       MYSQL_USER: $DB_USER
       # Définit le mot de passe de l'utilosateur de la base MYSQL
       MYSQL_PASSWORD: $DB_PASSWORD
+ # Cette partie volume de mariadb, vous permet d'initialiser votre base de données depuis un fichier .sql
+ #   volumes:
+ #     - ./mariadb-init:/docker-entrypoint-initdb.d # Placer votre fichier d'initialsation .sql à cette adresse.
 
 #######################################################################################################
   # Nom de la section du conteneur php
