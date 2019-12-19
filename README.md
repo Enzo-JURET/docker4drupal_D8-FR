@@ -1,4 +1,4 @@
-# Docker-based Drupal stack
+# Pile Drupal à base de dockers
 
 [![Build Status](https://travis-ci.org/wodby/docker4drupal.svg?branch=master)](https://travis-ci.org/wodby/docker4drupal)
 
@@ -27,8 +27,8 @@ La pile (stack) Drupal se compose des conteneurs par défaut suivants :
 | [Varnish]       | 6.0, 4.1               | `varnish`       | [wodby/varnish]                    | ✓        |
 | [Node.js]       | 12, 10, 8              | `node`          | [wodby/node]                       |         |
 | [Drupal node]   | 1.0                    | `drupal-node`   | [wodby/drupal-node]                |         |
-| [Solr]          | 8, 7, 6, 5             | `solr`          | [wodby/solr]                       | ✓        |
-| [Elasticsearch] | 7, 6                   | `elasticsearch` | [wodby/elasticsearch]              |         |
+| [Solr]          | 8, 7, 6, 5             | `solr`          | [wodby/solr]                       |         |
+| [Elasticsearch] | 7, 6                   | `elasticsearch` | [wodby/elasticsearch]              | ✓        |
 | [Kibana]        | 7, 6                   | `kibana`        | [wodby/kibana]                     |         |
 | [OpenSMTPD]     | 6.0                    | `opensmtpd`     | [wodby/opensmtpd]                  |         |
 | [Mailhog]       | latest                 | `mailhog`       | [mailhog/mailhog]                  |         |
@@ -43,9 +43,7 @@ La pile (stack) Drupal se compose des conteneurs par défaut suivants :
 | Portainer       | latest                 | `portainer`     | [portainer/portainer]              | ✓       |
 | Traefik         | latest                 | `traefik`       | [_/traefik]                        | ✓       |
 
-Versions Drupal supportées : 8 / 7
-
-❗️PHP 5.6[a atteint la fin de vie](http://php.net/supported-versions.php) et n'est plus supporté par l'équipe PHP. PHP 7.1 est actuellement en mode correctif de sécurité uniquement. Nous vous conseillons fortement de migrer vers la dernière version stable de PHP.   
+Versions Drupal supportées : 8
 
 ## Documentation
 
