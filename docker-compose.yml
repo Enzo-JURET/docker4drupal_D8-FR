@@ -36,7 +36,7 @@ services:
     environment:
       # Définit l'hôte de la Base de données  
       DB_HOST: $DB_HOST
-      # Définit le port de la Base de données
+      # Définit le port d'accès à la Base de données
       DB_PORT: $DB_PORT
       # Définit le nom de l'utilisateur de la base MySQL
       DB_USER: $DB_USER
@@ -95,7 +95,7 @@ services:
       - nginx
     # Permet de définir les variables d'environnement
     environment:
-      # Clé d'encodage de varnish
+      # Clé secret de varnish
       VARNISH_SECRET: secret
       # Permet de définir le conteneur hôte que varnish va prendre en charge
       VARNISH_BACKEND_HOST: nginx
