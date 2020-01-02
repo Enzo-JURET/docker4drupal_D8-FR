@@ -204,6 +204,19 @@ services:
 #      - "traefik.http.routers.${PROJECT_NAME}_apache.rule=Host(`${PROJECT_BASE_URL}`)"
 
 #######################################################################################################
+#  pma:
+#    image: phpmyadmin/phpmyadmin
+#    container_name: "${PROJECT_NAME}_pma"
+#    environment:
+#      PMA_HOST: $DB_HOST
+#      PMA_USER: $DB_USER
+#      PMA_PASSWORD: $DB_PASSWORD
+#      PHP_UPLOAD_MAX_FILESIZE: 1G
+#      PHP_MAX_INPUT_VARS: 1G
+#    labels:
+#      - "traefik.http.routers.${PROJECT_NAME}_pma.rule=Host(`pma.${PROJECT_BASE_URL}`)"
+
+#######################################################################################################
 ### REMPLACER À LA PLACE DU CONTENEUR varnish
 #  redis:
 #    container_name: "${PROJECT_NAME}_redis"
