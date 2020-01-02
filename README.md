@@ -61,11 +61,11 @@ Traduit avec www.DeepL.com/Translator (version gratuite)
 
 ## Maintenance
 
-Nous mettons régulièrement à jour les images utilisées dans cette pile et les publions ensemble, voir[page des versions](https://github.com/wodby/docker4drupal/releases) pour le journal complet des modifications et les instructions de mise à jour. La plupart des mises à jour de routine pour les images et ce projet ont été effectuées par[the bot](https://github.com/wodbot) via des scripts situés sur[wodby/images](https://github.com/wodby/images).
+Nous mettons régulièrement à jour les images utilisées dans cette pile et les publions ensemble, voir [page des versions](https://github.com/wodby/docker4drupal/releases) pour le journal complet des modifications et les instructions de mise à jour. La plupart des mises à jour de routine pour les images et ce projet ont été effectuées par [Le bot](https://github.com/wodbot) via des scripts situés sur [wodby/images](https://github.com/wodby/images).
 
 ## Au-delà de l'environnement local
 
-Docker4Drupal est un projet conçu pour vous aider à créer un environnement local avec docker-compose. Si vous voulez déployer une pile cohérente avec orchestrations sur votre propre serveur, allez voir[Drupal stack](https://wodby.com/stacks/drupal) sur Wodby ![](https://www.google.com/s2/favicons?domain=wodby.com).
+Docker4Drupal est un projet conçu pour vous aider à créer un environnement local avec docker-compose. Si vous voulez déployer une pile cohérente avec orchestrations sur votre propre serveur, allez voir [Drupal stack](https://wodby.com/stacks/drupal) sur Wodby ![](https://www.google.com/s2/favicons?domain=wodby.com).
 
 ## Etapes de mise en place
 
