@@ -111,14 +111,25 @@ services:
       - "traefik.http.routers.${PROJECT_NAME}_varnish.rule=Host(`varnish.${PROJECT_BASE_URL}`)"
 
 #######################################################################################################
-  elasticsearch:
-    image: wodby/elasticsearch:$ELASTICSEARCH_TAG
+  memcached:
+    container_name: "${PROJECT_NAME}_memcached"
+    image: wodby/memcached:$MEMCACHED_TAG
+
+#######################################################################################################
+  # Nom de la section du conteneur solr
+  solr:
+  # Image solr venant de Docker Hub (Indéxé de la version de solr choisi dans le fichier .env)
+    image: wodby/solr:$SOLR_TAG
+    # Nom du conteneur (Préfixé du nom de votre projet se trouvant dans le fichier .env)
+    container_name: "${PROJECT_NAME}_solr"
+    # Permet de définir les variables d'environnements
     environment:
-      ES_JAVA_OPTS: "-Xms500m -Xmx500m"
-    ulimits:
-      memlock:
-        soft: -1
-        hard: -1
+      # Permet de définir la version de la configuration par défault de Solr
+      SOLR_DEFAULT_CONFIG_SET: $SOLR_CONFIG_SET
+      SOLR_HEAP: 1024m
+    # Définit l'URL de sortie de la page de configuration de solr depuis traefik
+    labels:
+      - "traefik.http.routers.${PROJECT_NAME}_solr.rule=Host(`solr.${PROJECT_BASE_URL}`)"
 
 #######################################################################################################
   # Nom de la section du conteneur portainer
@@ -247,12 +258,6 @@ services:
 #    command: sh -c 'npm install && npm run start'
 
 #######################################################################################################
-### REMPLACER À LA PLACE DU CONTENEUR varnish
-#  memcached:
-#    container_name: "${PROJECT_NAME}_memcached"
-#    image: wodby/memcached:$MEMCACHED_TAG
-
-#######################################################################################################
 #  rsyslog:
 #    container_name: "${PROJECT_NAME}_rsyslog"
 #    image: wodby/rsyslog:$RSYSLOG_TAG
@@ -303,21 +308,16 @@ services:
 #      - files:/mnt/files
 
 #######################################################################################################
-### REMPLACER À LA PLACE DU CONTENEUR elasticsearch
-# Nom de la section du conteneur solr
-#  solr:
-#  # Image solr venant de Docker Hub (Indéxé de la version de solr choisi dans le fichier .env)
-#    image: wodby/solr:$SOLR_TAG
-#    # Nom du conteneur (Préfixé du nom de votre projet se trouvant dans le fichier .env)
-#    container_name: "${PROJECT_NAME}_solr"
-#    # Permet de définir les variables d'environnements
+### REMPLACER À LA PLACE DU CONTENEUR Solr
+#  elasticsearch:
+#    image: wodby/elasticsearch:$ELASTICSEARCH_TAG
 #    environment:
-#      # Permet de définir la version de la configuration par défault de Solr
-#      SOLR_DEFAULT_CONFIG_SET: $SOLR_CONFIG_SET
-#      SOLR_HEAP: 1024m
-#    # Définit l'URL de sortie de la page de configuration de solr depuis traefik
-#    labels:
-#      - "traefik.http.routers.${PROJECT_NAME}_solr.rule=Host(`solr.${PROJECT_BASE_URL}`)"
+#      ES_JAVA_OPTS: "-Xms500m -Xmx500m"
+#    ulimits:
+#      memlock:
+#        soft: -1
+#        hard: -1
+
 
 #######################################################################################################
 #  kibana:
