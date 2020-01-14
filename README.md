@@ -16,18 +16,18 @@ La pile (stack) Drupal se compose des conteneurs par défaut suivants :
 
 | Container       | Versions               | Service name    | Image                              | Default |
 | --------------  | ---------------------- | --------------- | ---------------------------------- | ------- |
-| [Nginx]         | 1.17, 1.16             | `nginx`         | [wodby/nginx]                      | ✓        |
+| [Nginx]         | 1.17	               | `nginx`         | [wodby/nginx]                      | ✓        |
 | [Apache]        | 2.4                    | `apache`        | [wodby/apache]                     |         |
 | [Drupal]        | 8, 7                   | `php`           | [wodby/drupal]                     |        |
-| [PHP]           | 7.3, 7.2, 7.1, 5.6     | `php`           | [wodby/drupal-php]                 | ✓        |
-| [MariaDB]       | 10.4, 10.3, 10.2, 10.1 | `mariadb`       | [wodby/mariadb]                    | ✓       |
+| [PHP]           | 7.3					   | `php`           | [wodby/drupal-php]                 | ✓        |
+| [MariaDB]       | 10.4				   | `mariadb`       | [wodby/mariadb]                    | ✓       |
 | [PostgreSQL]    | 12, 11, 10, 9.x        | `postgres`      | [wodby/postgres]                   |         |
 | [Redis]         | 5, 4                   | `redis`         | [wodby/redis]                      |         |
 | [Memcached]     | 1                      | `memcached`     | [wodby/memcached]                  | ✓        |
-| [Varnish]       | 6.0, 4.1               | `varnish`       | [wodby/varnish]                    | ✓        |
+| [Varnish]       | 6.0		               | `varnish`       | [wodby/varnish]                    | ✓        |
 | [Node.js]       | 12, 10, 8              | `node`          | [wodby/node]                       |         |
 | [Drupal node]   | 1.0                    | `drupal-node`   | [wodby/drupal-node]                |         |
-| [Solr]          | 8, 7, 6, 5             | `solr`          | [wodby/solr]                       | ✓        |
+| [Solr]          | 8		               | `solr`          | [wodby/solr]                       | ✓        |
 | [Elasticsearch] | 7, 6                   | `elasticsearch` | [wodby/elasticsearch]              |         |
 | [Kibana]        | 7, 6                   | `kibana`        | [wodby/kibana]                     |         |
 | [OpenSMTPD]     | 6.0                    | `opensmtpd`     | [wodby/opensmtpd]                  |         |
@@ -72,9 +72,9 @@ Docker4Drupal est un projet conçu pour vous aider à créer un environnement lo
 * Télécharger / Cloner le projet dans un répertoire
 * Modifier le fichier des variables d'environnement (.env)
 * Modifier le fichier de configuration .yml (docker-compose.yml)
-* Déplacer les fichiers de Docker4Drupal à la racine du projet Drupal 8
+* Adapter les volumes selon l'emplacement de votre Drupal
 * Démarer le serveur Docker avec la commande (docker-compose up -d)
-* Accéder à votre site avec cette URL : PROJECT_BASE_URL:PORT_TRAEFIK
+* Accéder à votre site cette structure d'URL : PROJECT_BASE_URL:PORT_TRAEFIK
 
 
 ## Autres projets Docker4x
