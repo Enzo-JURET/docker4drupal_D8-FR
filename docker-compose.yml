@@ -52,7 +52,7 @@ services:
       COLUMNS: 80
     # Définit la chemin ou se trouve votre projet Drupal, afin que PHP connaissent l'emplacement pour lequel il doit agir
     volumes:
-      - [EMPLACEMENT DU DRUPAL]:/var/www/html
+      - ./:/var/www/html
 
 #######################################################################################################
   # Nom de la section du conteneur nginx
@@ -78,7 +78,7 @@ services:
       NGINX_VHOST_PRESET: $NGINX_VHOST_PRESET
      # Définit la chemin ou se trouve votre projet Drupal, afin que Nginx connaissent l'emplacement sur lequel il doit agir
     volumes:
-      - [EMPLACEMENT DU DRUPAL]:/var/www/html
+      - ./:/var/www/html
     # Définit l'URL d'accès du serveur web depuis traefik
     labels:
       - "traefik.http.routers.${PROJECT_NAME}_nginx.rule=Host(`${PROJECT_BASE_URL}`)"
