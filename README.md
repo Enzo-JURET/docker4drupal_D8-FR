@@ -1,3 +1,6 @@
+# Version du Projet
+version : 1.1.0
+
 # Pile Drupal à base de dockers
 
 [![Build Status](https://travis-ci.org/wodby/docker4drupal.svg?branch=master)](https://travis-ci.org/wodby/docker4drupal)
