@@ -1,6 +1,3 @@
-# Version du Projet
-version : 1.1.0
-
 # Pile Drupal à base de dockers
 
 [![Build Status](https://travis-ci.org/wodby/docker4drupal.svg?branch=master)](https://travis-ci.org/wodby/docker4drupal)
@@ -12,6 +9,9 @@ Docker4Drupal est un ensemble d'images de docker optimisé pour Drupal. Utilisez
 * Lire la documentation sur [**comment utiliser**](https://wodby.com/docs/stacks/drupal/local#usage)
 * Rejoignez notre communauté sur [Spectrum](https://spectrum.chat/wodby/drupal) et posez des questions sur le canal `#Drupal`.
 * Suivez [@wodbycloud](https://twitter.com/wodbycloud) pour les annonces à venir
+
+## Version du Projet
+version : 1.1.0
 
 ## Stack
 
