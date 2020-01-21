@@ -52,7 +52,7 @@ services:
       COLUMNS: 80
     # Définis le chemin d'accès à votre Drupal
     volumes:
-      - ../drupal_jumelles/:/var/www/html
+      - ./:/var/www/html
 
 #######################################################################################################
   # Nom de la section du conteneur nginx
@@ -78,7 +78,7 @@ services:
       NGINX_VHOST_PRESET: $NGINX_VHOST_PRESET
     # Définis le chemin d'accès à votre Drupal
     volumes:
-      - ../drupal_jumelles/:/var/www/html
+      - ./:/var/www/html
     # Définition du routage par traefik
     labels:
       - "traefik.http.routers.${PROJECT_NAME}_nginx.rule=Host(`${PROJECT_BASE_URL}`)"
@@ -161,7 +161,7 @@ services:
     command: --api.insecure=true --providers.docker
     # Définis le port d'accès au stack Docker comprenant tous les composants de notre serveur web 
     ports:
-      - '9000:80'
+      - '[PORT DISPONIBLE]:80'
     # Définis le chemin où se trouve votre le fichier de prépogrammation algorithmique .sock de Docker, afin que Traefik connaissent l'emplacement sur lequel il doit agir
     volumes:
       - /var/run/docker.sock:/var/run/docker.sock
